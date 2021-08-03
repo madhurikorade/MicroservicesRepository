@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Gateway-Service
+  cloud:    gateway:      routes:      - id: countries-service
+        uri: lb://countries-service
+        predicates:        - Path=/country/**
+      - id: capita-service
+        uri: lb://capital-service
+        predicates:
+        - Path=/capital/**
+        
+eureka:  client:    register-with-eureka: true
+    fetch-registry: true
+    service-url:      defaultZone: http://localhost:8771/eureka
+      
+server:  port: 8989      
+      
+      
+                          
